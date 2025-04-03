@@ -1,5 +1,9 @@
 import java.util.*;
 
+/**
+ * Demonstrates the Iterator design pattern with examples of graph traversal,
+ * tree traversal, and array traversal using custom iterators.
+ */
 public class IteratorPatternExample {
   public static void main(String[] args) {
     // Graph Example
@@ -41,19 +45,41 @@ public class IteratorPatternExample {
   }
 }
 
-// Common Iterator Interface
+/**
+ * Common interface for iterators.
+ *
+ * @param <T> the type of elements returned by this iterator
+ */
 interface Iterator<T> {
+  /**
+   * Checks if there are more elements to iterate over.
+   *
+   * @return true if there are more elements, false otherwise
+   */
   boolean hasNext();
 
+  /**
+   * Returns the next element in the iteration.
+   *
+   * @return the next element
+   */
   T next();
 }
 
-// Graph Iterator (BFS Traversal)
+/**
+ * Iterator for traversing a graph using Breadth-First Search (BFS).
+ */
 class GraphIterator implements Iterator<Integer> {
   private Queue<Integer> queue = new LinkedList<>();
   private Set<Integer> visited = new HashSet<>();
   private Map<Integer, List<Integer>> graph;
 
+  /**
+   * Constructs a GraphIterator starting from the given node.
+   *
+   * @param graph the graph represented as an adjacency list
+   * @param startNode the starting node for traversal
+   */
   public GraphIterator(Map<Integer, List<Integer>> graph, int startNode) {
     this.graph = graph;
     queue.add(startNode);
@@ -78,14 +104,26 @@ class GraphIterator implements Iterator<Integer> {
   }
 }
 
-// Tree Iterator (Inorder Traversal)
+/**
+ * Iterator for traversing a binary tree using Inorder Traversal.
+ */
 class TreeIterator implements Iterator<Integer> {
   private Stack<TreeNode> stack = new Stack<>();
 
+  /**
+   * Constructs a TreeIterator starting from the given root node.
+   *
+   * @param root the root node of the binary tree
+   */
   public TreeIterator(TreeNode root) {
     pushLeft(root);
   }
 
+  /**
+   * Pushes all left children of the given node onto the stack.
+   *
+   * @param node the starting node
+   */
   private void pushLeft(TreeNode node) {
     while (node != null) {
       stack.push(node);
@@ -106,21 +144,35 @@ class TreeIterator implements Iterator<Integer> {
   }
 }
 
-// Tree Node
+/**
+ * Represents a node in a binary tree.
+ */
 class TreeNode {
   int val;
   TreeNode left, right;
 
+  /**
+   * Constructs a TreeNode with the given value.
+   *
+   * @param val the value of the node
+   */
   public TreeNode(int val) {
     this.val = val;
   }
 }
 
-// Array Iterator
+/**
+ * Iterator for traversing an array.
+ */
 class ArrayIterator implements Iterator<Integer> {
   private int[] array;
   private int index = 0;
 
+  /**
+   * Constructs an ArrayIterator for the given array.
+   *
+   * @param array the array to be traversed
+   */
   public ArrayIterator(int[] array) {
     this.array = array;
   }
